@@ -1,4 +1,4 @@
-# Telosys 3 Posman Tests Template
+# Telosys 3 Postman Tests Template
 
 This is a Telosys Template for Postman tests generation.
 Template purpose : generate the Postman JSON Tests files based on your DSL model.
