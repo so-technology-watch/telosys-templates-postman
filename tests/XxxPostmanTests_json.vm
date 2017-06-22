@@ -112,7 +112,7 @@ ${firstPart}${secondPart}
 				}
 			],
 			"request": {
-				"url": "http://localhost:3000/api/$uncapitalizedEntityName/",
+				"url": "http://localhost:3000/api/$uncapitalizedEntityName",
 				"method": "POST",
 				"header": [
 					{
@@ -296,27 +296,6 @@ ${firstPart}${secondPart}
 							"        } else {",
 							"            tests[\"Object message value is 'Entity not found'\"] = jsonData.message === \"Entity not found\";",
 							"    }",
-							"    } else {",
-							"       for (var i = 0; i < jsonData.length; i++) {",
-## loop through entity attributes
-#foreach( $attrib in $entity.attributes )
-#set ( $firstPart = '							"        tests[\"Object number \" + i + \" Value '+$uncapitalizedEntityName+'_'+$attrib.name+' is correct\"] = ')
-#if ( $attrib.type == "int" || $attrib.type == "Integer" || $attrib.type == "Short" ) 
-#set ( $secondPart = 'jsonData[i].'+$uncapitalizedEntityName+'_'+$attrib.name+' === 77;",')
-#elseif ( $attrib.type == "BigDecimal" )
-#set ( $secondPart = 'jsonData[i].'+$uncapitalizedEntityName+'_'+$attrib.name+' === \"99.99\";",')
-#elseif ( $attrib.type == "boolean" )
-#set ( $secondPart = 'jsonData[i].'+$uncapitalizedEntityName+'_'+$attrib.name+' === true;",')
-#elseif ( $attrib.type == "Date" )
-#set ( $secondPart = 'jsonData[i].'+$uncapitalizedEntityName+'_'+$attrib.name+' === \"2012-04-23T18:25:43.511Z\";",')
-#else
-#set ( $secondPart = 'jsonData[i].'+$uncapitalizedEntityName+'_'+$attrib.name+' === \"lorem ipsum\";",')
-#end
-## end if
-${firstPart}${secondPart}
-#end
-## end foreach
-							"    }",
 							"}",
 							"",
 							""
@@ -325,7 +304,7 @@ ${firstPart}${secondPart}
 				}
 			],
 			"request": {
-				"url": "http://localhost:3000/api/$uncapitalizedEntityName/",
+				"url": "http://localhost:3000/api/$uncapitalizedEntityName",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -384,7 +363,7 @@ ${firstPart}${secondPart}
 				}
 			],
 			"request": {
-				"url": "http://localhost:3000/api/$uncapitalizedEntityName/count/",
+				"url": "http://localhost:3000/api/$uncapitalizedEntityName/count",
 				"method": "GET",
 				"header": [],
 				"body": {},
@@ -434,7 +413,7 @@ ${firstPart}${secondPart}
 				}
 			],
 			"request": {
-				"url": "http://localhost:3000/api/$uncapitalizedEntityName/$getParams",
+				"url": "http://localhost:3000/api/$uncapitalizedEntityName",
 				"method": "PUT",
 				"header": [
 					{
