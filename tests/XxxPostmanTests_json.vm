@@ -25,9 +25,9 @@
 #set ( $rawJsonRequest = $rawJsonRequest + ',' )
 #end
 #if ( $attrib.type == "int" || $attrib.type == "Integer" || $attrib.type == "BigDecimal" || $attrib.type == "boolean" )
-#set ( $rawJsonRequest = $rawJsonRequest + '\n\t\"' + $uncapitalizedEntityName + '_' + $attrib.name + '\": ' + $testValues[$foreach.index] )
+#set ( $rawJsonRequest = $rawJsonRequest + '\n\t\"' + $attrib.name + '\": ' + $testValues[$foreach.index] )
 #else 
-#set ( $rawJsonRequest = $rawJsonRequest + '\n\t\"' + $uncapitalizedEntityName + '_' + $attrib.name + '\": ' + '\"' + $testValues[$foreach.index] + '\"' )
+#set ( $rawJsonRequest = $rawJsonRequest + '\n\t\"' + $attrib.name + '\": ' + '\"' + $testValues[$foreach.index] + '\"' )
 #end
 #end
 ## end foreach
@@ -60,6 +60,8 @@
 							"// Test if response code is 200 or 400",
 							"if (responseCode.code === 200) {",
 							"    tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"    } else if (responseCode.code === 201) {",
+							"        tests[\"Status code is 201\"] = responseCode.code === 201;",
 							"    } else {",
 							"        tests[\"Status code is 400\"] = responseCode.code === 400;",
 							"}",
@@ -90,17 +92,17 @@
 							"    } else {",
 ## loop through entity attributes
 #foreach( $attrib in $entity.attributes )
-#set ( $firstPart = '							"        tests[\"Object value '+$uncapitalizedEntityName+'_'+$attrib.name+' is correct\"] = ')
+#set ( $firstPart = '							"        tests[\"Object value '+$attrib.name+' is correct\"] = ')
 #if ( $attrib.type == "int" || $attrib.type == "Integer" || $attrib.type == "Short" ) 
-#set ( $secondPart = 'jsonData.'+$uncapitalizedEntityName+'_'+$attrib.name+' === 77;",')
+#set ( $secondPart = 'jsonData.'+$attrib.name+' === 77;",')
 #elseif ( $attrib.type == "BigDecimal" )
-#set ( $secondPart = 'jsonData.'+$uncapitalizedEntityName+'_'+$attrib.name+' === \"99.99\";",')
+#set ( $secondPart = 'jsonData.'+$attrib.name+' === \"99.99\";",')
 #elseif ( $attrib.type == "boolean" )
-#set ( $secondPart = 'jsonData.'+$uncapitalizedEntityName+'_'+$attrib.name+' === true;",')
+#set ( $secondPart = 'jsonData.'+$attrib.name+' === true;",')
 #elseif ( $attrib.type == "Date" )
-#set ( $secondPart = 'jsonData.'+$uncapitalizedEntityName+'_'+$attrib.name+' === \"2012-04-23T18:25:43.511Z\";",')
+#set ( $secondPart = 'jsonData.'+$attrib.name+' === \"2012-04-23T18:25:43.511Z\";",')
 #else
-#set ( $secondPart = 'jsonData.'+$uncapitalizedEntityName+'_'+$attrib.name+' === \"lorem ipsum\";",')
+#set ( $secondPart = 'jsonData.'+$attrib.name+' === \"lorem ipsum\";",')
 #end
 ## end if
 ${firstPart}${secondPart}
@@ -170,17 +172,17 @@ ${firstPart}${secondPart}
 							"    } else {",
 ## loop through entity attributes
 #foreach( $attrib in $entity.attributes )
-#set ( $firstPart = '							"        tests[\"Object value '+$uncapitalizedEntityName+'_'+$attrib.name+' is correct\"] = ')
+#set ( $firstPart = '							"        tests[\"Object value '+$attrib.name+' is correct\"] = ')
 #if ( $attrib.type == "int" || $attrib.type == "Integer" || $attrib.type == "Short" ) 
-#set ( $secondPart = 'jsonData.'+$uncapitalizedEntityName+'_'+$attrib.name+' === 77;",')
+#set ( $secondPart = 'jsonData.'+$attrib.name+' === 77;",')
 #elseif ( $attrib.type == "BigDecimal" )
-#set ( $secondPart = 'jsonData.'+$uncapitalizedEntityName+'_'+$attrib.name+' === \"99.99\";",')
+#set ( $secondPart = 'jsonData.'+$attrib.name+' === \"99.99\";",')
 #elseif ( $attrib.type == "boolean" )
-#set ( $secondPart = 'jsonData.'+$uncapitalizedEntityName+'_'+$attrib.name+' === true;",')
+#set ( $secondPart = 'jsonData.'+$attrib.name+' === true;",')
 #elseif ( $attrib.type == "Date" )
-#set ( $secondPart = 'jsonData.'+$uncapitalizedEntityName+'_'+$attrib.name+' === \"2012-04-23T18:25:43.511Z\";",')
+#set ( $secondPart = 'jsonData.'+$attrib.name+' === \"2012-04-23T18:25:43.511Z\";",')
 #else
-#set ( $secondPart = 'jsonData.'+$uncapitalizedEntityName+'_'+$attrib.name+' === \"lorem ipsum\";",')
+#set ( $secondPart = 'jsonData.'+$attrib.name+' === \"lorem ipsum\";",')
 #end
 ## end if
 ${firstPart}${secondPart}
